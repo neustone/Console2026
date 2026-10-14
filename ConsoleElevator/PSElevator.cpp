@@ -132,35 +132,35 @@ int PSElevator::step()
 	return 0;
 }
 
-int PSElevator::updateDirection()
-{
-	if (requests.empty())
-	{
-		currState = ElevatorState::Idle;
-	}
-	else
-	{
-		// Look for any remaining requests in the direction we were heading
-//		bool hasRequestsAbove = false;
-//		bool hasRequestsBelow = false;
-//		for (int floor : requests)
+//int PSElevator::updateDirection()
+//{
+//	if (requests.empty())
+//	{
+//		currState = ElevatorState::Idle;
+//	}
+//	else
+//	{
+//		// Look for any remaining requests in the direction we were heading
+////		bool hasRequestsAbove = false;
+////		bool hasRequestsBelow = false;
+////		for (int floor : requests)
+////		{
+////			if (floor > currFloor)
+////				hasRequestsAbove = true;
+////			if (floor < currFloor)
+////				hasRequestsBelow = true;
+////		}
+//		bool hasRequestsAbove = *requests.rbegin() > currFloor ? true : false;
+//		bool hasRequestsBelow = *requests.begin() < currFloor ? true : false;
+//
+//		if (currState == ElevatorState::Up && !hasRequestsAbove)
 //		{
-//			if (floor > currFloor)
-//				hasRequestsAbove = true;
-//			if (floor < currFloor)
-//				hasRequestsBelow = true;
+//			currState = hasRequestsBelow ? ElevatorState::Down : ElevatorState::Idle;
 //		}
-		bool hasRequestsAbove = *requests.rbegin() > currFloor ? true : false;
-		bool hasRequestsBelow = *requests.begin() < currFloor ? true : false;
-
-		if (currState == ElevatorState::Up && !hasRequestsAbove)
-		{
-			currState = hasRequestsBelow ? ElevatorState::Down : ElevatorState::Idle;
-		}
-		else if (currState == ElevatorState::Down && !hasRequestsBelow)
-		{
-			currState = hasRequestsAbove ? ElevatorState::Up : ElevatorState::Idle;
-		}
-	}
-	return (int)currState;
-}
+//		else if (currState == ElevatorState::Down && !hasRequestsBelow)
+//		{
+//			currState = hasRequestsAbove ? ElevatorState::Up : ElevatorState::Idle;
+//		}
+//	}
+//	return (int)currState;
+//}

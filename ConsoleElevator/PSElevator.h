@@ -34,7 +34,7 @@ class PSElevator
 	/// </summary>
 	void processRequests();
 	int step();
-	int updateDirection();
+//	int updateDirection();
 
 public:
 

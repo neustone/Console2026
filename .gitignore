@@ -1,0 +1,7 @@
+﻿Debug
+Release
+.vs
+ConsoleElevator/ConsoleElevator.vcxproj.filters
+ConsoleElevator/ConsoleElevator.vcxproj.user
+SciexConsole/Console01.vcxproj.filters
+SciexConsole/Console01.vcxproj.user
