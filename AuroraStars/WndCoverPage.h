@@ -10,10 +10,11 @@ public:
 protected:
 	CBitmap m_bmpLogo;
 
+	virtual int onWndCreate();
+	virtual void onWndDestroy();
 	virtual int onWndRender(CDC* pDC);
+	virtual void onWndSize(UINT nType, int cx, int cy);
 	virtual void onLButtonDown(UINT nFlags, int x, int y);
 	virtual void onLButtonUp(UINT nFlags, int x, int y);
-	virtual void onWndDestroy();
-	virtual int onWndCreate();
 };
 

@@ -81,13 +81,13 @@ void CWndAurora::setWndFocus()
 
 int CWndAurora::sendMessage(WPARAM wParam, LPARAM lParam)
 {
-//	LRESULT ret = GetParent()->SendMessage(WM_WND_ABARIS_MESSAGE, wParam, lParam);
+	LRESULT ret = GetParent()->SendMessage(WM_WND_ABARIS_MESSAGE, wParam, lParam);
 	return 0;
 }
 
 int CWndAurora::postMessage(WPARAM wParam, LPARAM lParam)
 {
-//	LRESULT ret = GetParent()->PostMessage(WM_WND_ABARIS_MESSAGE, wParam, lParam);
+	LRESULT ret = GetParent()->PostMessage(WM_WND_ABARIS_MESSAGE, wParam, lParam);
 	return 0;
 }
 
@@ -166,15 +166,18 @@ BOOL CWndAurora::PreCreateWindow(CREATESTRUCT& cs)
 	return CWnd::PreCreateWindow(cs);
 }
 
+// CWndAurora message handlers
+
 BEGIN_MESSAGE_MAP(CWndAurora, CWnd)
-ON_MESSAGE(WM_WND_ABARIS_MESSAGE, OnMsgWndRequest)
-ON_WM_CREATE()
-ON_WM_PAINT()
-ON_WM_DESTROY()
-ON_WM_SIZE()
-ON_WM_LBUTTONDBLCLK()
-ON_WM_LBUTTONDOWN()
-ON_WM_LBUTTONUP()
+	ON_MESSAGE(WM_WND_ABARIS_MESSAGE, OnMsgWndRequest)
+	ON_WM_CREATE()
+	ON_WM_PAINT()
+	ON_WM_DESTROY()
+	ON_WM_SIZE()
+	ON_WM_LBUTTONDBLCLK()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+//	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 LRESULT CWndAurora::OnMsgWndRequest(WPARAM wParam, LPARAM lParam)
@@ -241,35 +244,6 @@ void CWndAurora::OnLButtonUp(UINT nFlags, CPoint point)
 	CWnd::OnLButtonUp(nFlags, point);
 }
 
-
-//BEGIN_MESSAGE_MAP(CWndAurora, CWnd)
-//	ON_WM_PAINT()
-//	ON_WM_LBUTTONDOWN()
-//	ON_WM_LBUTTONUP()
-//	ON_WM_DESTROY()
-//	ON_WM_ERASEBKGND()
-//	ON_WM_SIZE()
-//	ON_WM_CREATE()
-//END_MESSAGE_MAP()
-//
-//// CWndAurora message handlers
-//
-//
-//void CWndAurora::OnLButtonDown(UINT nFlags, CPoint point)
-//{
-////	onLButtonDown(nFlags, point.x, point.y);
-//
-//	CWnd::OnLButtonDown(nFlags, point);
-//}
-//
-//
-//void CWndAurora::OnLButtonUp(UINT nFlags, CPoint point)
-//{
-////	onLButtonUp(nFlags, point.x, point.y);
-//
-//	CWnd::OnLButtonUp(nFlags, point);
-//}
-//
 //BOOL CWndAurora::OnEraseBkgnd(CDC* pDC)
 //{
 ////	onWndRender(pDC);

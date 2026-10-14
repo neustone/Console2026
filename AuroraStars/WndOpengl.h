@@ -4,18 +4,10 @@
 class CWndOpengl : public CWndAurora
 {
 public:
-	enum WND_STYLE_
-	{
-		WND_STYLE_3D = 0,
-		WND_STYLE_TRANSVERSAL,
-		WND_STYLE_SAGITTAL,
-		WND_STYLE_CORONAL,
-	};
-	CWndOpengl(WND_STYLE_ wndStyle);
+	CWndOpengl();
 	virtual ~CWndOpengl(void);
 
 protected:
-	WND_STYLE_ m_wndStyle;
 	///. Opengl
 	HGLRC m_hRC;
 	CRect m_rtViewPort;

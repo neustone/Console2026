@@ -43,9 +43,8 @@ namespace CWndOpengl_Pri
 }
 
 
-CWndOpengl::CWndOpengl(WND_STYLE_ wndStyle)
+CWndOpengl::CWndOpengl()
 	: CWndAurora()
-	, m_wndStyle(wndStyle)
 	, m_hRC(0)
 	, m_rtViewPort()
 {
@@ -106,8 +105,7 @@ int CWndOpengl::onInitializeOpengl()
 			GL_PERSPECTIVE_CORRECTION_HINT,
 			/* indicate that how the efficient\quality option should be chosen: */
 			/* Really Nice Perspective Calculations.*/
-			GL_NICEST
-		);
+			GL_NICEST);
 
 		//Note that dithering, unlike many other features, is enabled by default.
 		glEnable(GL_DITHER);
@@ -142,18 +140,6 @@ int CWndOpengl::onInitializeOpengl()
 		glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
 
 		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-
-		//setup the texture coord generation
-//		glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);//GL_OBJECT_LINEAR//
-//		glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-//		glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-		//setup the tex gen
-		float xPlane[] = { 1.0f, 0.0f, 0.0f, 0.0f };
-		float yPlane[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-		float zPlane[] = { 0.0f, 0.0f, 1.0f, 0.0f };
-		glTexGenfv(GL_S,GL_EYE_PLANE,xPlane);
-		glTexGenfv(GL_T,GL_EYE_PLANE,yPlane);
-		glTexGenfv(GL_R,GL_EYE_PLANE,zPlane);
 
 		nRet = 0;
 	}
@@ -217,7 +203,7 @@ void CWndOpengl::resetScene()
 
 int CWndOpengl::onWndRender(CDC* pDC)
 {
-	TRACE(_T("CWndCoverPage::onWndRender\n"));
+	TRACE(_T("CWndOpengl::onWndRender\n"));
 	int nRet = -1;
 	ASSERT(pDC);
 	ASSERT(m_hRC);

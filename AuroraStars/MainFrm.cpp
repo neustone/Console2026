@@ -59,7 +59,7 @@ LRESULT CMainFrame::OnMsgWndAurora(WPARAM wParam, LPARAM lParam)
 	switch (wParam)
 	{
 	case 1:
-//		MessageBox(L"CMainFrame::OnMsgWndAurora, 1");
+		MessageBox(NULL, L"CMainFrame::OnMsgWndAurora, 1");
 		break;
 	case 2:
 		//AfxMessageBox(AFX_IDS_IDLEMESSAGE, MB_OK, 0);
@@ -90,7 +90,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	++ i;
 	if (nullptr == m_pWndViews[i])
 	{
-		m_pWndViews[1] = new CWndAurora(/*CWndOpengl::WND_STYLE_TRANSVERSAL*/);
+		m_pWndViews[1] = new CWndOpengl();
 		m_pWndViews[1]->createWnd(this, 1);
 		m_pWndViews[1]->showWnd(true);
 	}

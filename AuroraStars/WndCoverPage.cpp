@@ -34,13 +34,20 @@ int CWndCoverPage::onWndRender(CDC* pDC)
 			dcBmp.CreateCompatibleDC(m_pClientDC);
 			dcBmp.SelectObject(&m_bmpLogo);
 			memDC.StretchBlt(
-				10, 10, 20, 20,
+				m_rtClient.left, m_rtClient.top,
+				m_rtClient.Width(), m_rtClient.Height(),
 				&dcBmp, 0, 0, bm.bmWidth, bm.bmHeight,
 				SRCCOPY
 			);
 		}
 	}
 	return 0;
+}
+
+void CWndCoverPage::onWndSize(UINT nType, int cx, int cy)
+{
+	CWndAurora::onWndSize(nType, cx, cy);
+	onWndRender(getClientDC());
 }
 
 void CWndCoverPage::onLButtonDown(UINT nFlags, int x, int y)

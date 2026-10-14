@@ -23,7 +23,7 @@ public:
 
 protected:
 
-	CClientDC* m_pClientDC = nullptr;
+	CClientDC* m_pClientDC;
 	/// The coordinates of a window's client area
 	CRect m_rtClient;
 	/// The color of background, edge, title and value
@@ -41,6 +41,7 @@ protected:
 	virtual void onLButtonDblClk(UINT nFlags, int x, int y);
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	///. Generated message map functions
 	//{{AFX_MSG(CWndAbaris)	
 	afx_msg LRESULT OnMsgWndRequest(WPARAM wParam, LPARAM lParam);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -50,35 +51,14 @@ protected:
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+//	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	DECLARE_DYNAMIC(CWndAurora)
 public:
 };
-
 //
-//class CWndAurora : public CWnd
+//static int messageBoxAurora(LPCWSTR lpText, LPCWSTR lpCaption)
 //{
-//public:
-//	CWndAurora();
-//	virtual ~CWndAurora();
-//
-//
-//protected:
-//
-//
-
-//
-//	// Generated message map functions
-//	//{{AFX_MSG(CWndAbaris)	
-//	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-//	afx_msg void OnDestroy();
-//	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-//	afx_msg void OnPaint();
-//	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-//	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-//	afx_msg void OnSize(UINT nType, int cx, int cy);
-//	//}}AFX_MSG
-//public:
-//};
-//
+//	return ::MessageBox(NULL, lpText, lpCaption);
+//}
