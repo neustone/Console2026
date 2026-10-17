@@ -7,6 +7,12 @@
 class CWndAurora : public CWnd
 {
 public:
+	enum WND_MSG_
+	{
+		WND_MSG_UNKNOWN_ = 0,
+		WND_MSG_EXIT_,
+	};
+
 	CWndAurora();
 	virtual ~CWndAurora();
 	int render();
@@ -20,6 +26,7 @@ public:
 	void setWndFocus();
 	int sendMessage(WPARAM wParam = 0, LPARAM lParam = 0);
 	int postMessage(WPARAM wParam = 0, LPARAM lParam = 0);
+	static int messageBox(CWndAurora* pWnd, LPCWSTR lpText, LPCWSTR lpCaption);
 
 protected:
 
@@ -57,8 +64,3 @@ protected:
 	DECLARE_DYNAMIC(CWndAurora)
 public:
 };
-//
-//static int messageBoxAurora(LPCWSTR lpText, LPCWSTR lpCaption)
-//{
-//	return ::MessageBox(NULL, lpText, lpCaption);
-//}

@@ -16,5 +16,6 @@ protected:
 	virtual void onWndSize(UINT nType, int cx, int cy);
 	virtual void onLButtonDown(UINT nFlags, int x, int y);
 	virtual void onLButtonUp(UINT nFlags, int x, int y);
+	virtual void onLButtonDblClk(UINT nFlags, int x, int y);
 };
 

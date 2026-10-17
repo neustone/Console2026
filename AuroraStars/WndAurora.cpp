@@ -48,6 +48,13 @@ CDC* CWndAurora::getClientDC()
 	return m_pClientDC;
 }
 
+int CWndAurora::messageBox(CWndAurora* pWnd, LPCWSTR lpText, LPCWSTR lpCaption)
+{
+//	return MessageBox(lpText, lpCaption, 0);
+	return ::MessageBox(
+		pWnd ? pWnd->GetSafeHwnd() : NULL, lpText, lpCaption, 0);
+}
+
 bool CWndAurora::createWnd(CWnd* pParent, UINT nID)
 {
 	BOOL bFlag = CWnd::Create(
@@ -122,10 +129,9 @@ int CWndAurora::onWndRender(CDC* pDC)
 	TRACE(_T("CWndAurora::onWndRender\n"));
 	if (pDC)
 	{
-		CAuroraDC memDC(pDC, &m_rtClient);
-		memDC.SetBkMode(TRANSPARENT);
-		memDC.SetStretchBltMode(COLORONCOLOR);
-		memDC.FillSolidRect(m_rtClient, m_rgbBkColor);
+		pDC->SetBkMode(TRANSPARENT);
+		pDC->SetStretchBltMode(COLORONCOLOR);
+		pDC->FillSolidRect(m_rtClient, m_rgbBkColor);
 	}
 	return 0;
 }

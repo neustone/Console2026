@@ -20,7 +20,7 @@ public:
 #endif
 
 protected:
-	const static UINT32 nNumOfViews = 2;
+	const static UINT32 nNumOfViews = 4;
 	CWndAurora* m_pWndViews[nNumOfViews];
 
 	//////////////////////////////////////////////////////////////////////////

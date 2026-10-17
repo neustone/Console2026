@@ -52,12 +52,16 @@ void CWndCoverPage::onWndSize(UINT nType, int cx, int cy)
 
 void CWndCoverPage::onLButtonDown(UINT nFlags, int x, int y)
 {
-	postMessage(2);
 }
 
 void CWndCoverPage::onLButtonUp(UINT nFlags, int x, int y)
 {
-	sendMessage(1);
+//	postMessage(CWndAurora::WND_MSG_UNKNOWN_, (LPARAM)this);
+}
+
+void CWndCoverPage::onLButtonDblClk(UINT nFlags, int x, int y)
+{
+	postMessage(CWndAurora::WND_MSG_EXIT_, (LPARAM)this);
 }
 
 void CWndCoverPage::onWndDestroy()

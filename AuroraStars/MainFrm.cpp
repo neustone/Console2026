@@ -8,6 +8,7 @@
 
 #include "MainFrm.h"
 #include "WndCoverPage.h"
+#include "WndImage.h"
 #include "WndOpengl.h"
 
 #ifdef _DEBUG
@@ -56,17 +57,18 @@ void CMainFrame::onCleanUp()
 
 LRESULT CMainFrame::OnMsgWndAurora(WPARAM wParam, LPARAM lParam)
 {
+	CWndAurora* pWndSrc = reinterpret_cast<CWndAurora*>(lParam);
 	switch (wParam)
 	{
-	case 1:
-		MessageBox(NULL, L"CMainFrame::OnMsgWndAurora, 1");
+	case CWndAurora::WND_MSG_UNKNOWN_:
+		if (pWndSrc)
+		{
+			CWndAurora::messageBox(
+				pWndSrc, L"CMainFrame::OnMsgWndAurora, 1", L"AuroraStars");
+		}
 		break;
-	case 2:
-		//AfxMessageBox(AFX_IDS_IDLEMESSAGE, MB_OK, 0);
-		//if (m_pWndViews[1])
-		//{
-		//	m_pWndViews[1]->render();
-		//}
+	case CWndAurora::WND_MSG_EXIT_:
+		OnClose();
 		break;
 	default:
 		break;
@@ -84,15 +86,29 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (nullptr == m_pWndViews[i])
 	{
 		m_pWndViews[i] = new CWndCoverPage();
-		m_pWndViews[i]->createWnd(this, 0);
+		m_pWndViews[i]->createWnd(this, i);
 		m_pWndViews[i]->showWnd(true);
 	}
 	++ i;
 	if (nullptr == m_pWndViews[i])
 	{
-		m_pWndViews[1] = new CWndOpengl();
-		m_pWndViews[1]->createWnd(this, 1);
-		m_pWndViews[1]->showWnd(true);
+		m_pWndViews[i] = new CWndImage();
+		m_pWndViews[i]->createWnd(this, i);
+		m_pWndViews[i]->showWnd(true);
+	}
+	++i;
+	if (nullptr == m_pWndViews[i])
+	{
+		m_pWndViews[i] = new CWndOpengl();
+		m_pWndViews[i]->createWnd(this, i);
+		m_pWndViews[i]->showWnd(true);
+	}
+	++i;
+	if (nullptr == m_pWndViews[i])
+	{
+		m_pWndViews[i] = new CWndAurora();
+		m_pWndViews[i]->createWnd(this, i);
+		m_pWndViews[i]->showWnd(true);
 	}
 	return 0;
 }
@@ -165,15 +181,32 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 void CMainFrame::OnSize(UINT nType, int cx, int cy)
 {
 	CFrameWnd::OnSize(nType, cx, cy);
-	int posX = 0, posY = 0, width = cx/2, height = cy; 
-	if (m_pWndViews[0])
+	int posX = 0, posY = 0, width = cx/2, height = cy/2, i = 0; 
+	if (m_pWndViews[i])
 	{
-		m_pWndViews[0]->moveWnd(posX, posY, width, height, true);
-		posX += width;
+		m_pWndViews[i]->moveWnd(posX, posY, width, height, true);
 	}
-	if (m_pWndViews[1])
+
+	++ i;
+	posX += width;
+	if (m_pWndViews[i])
 	{
-		m_pWndViews[1]->moveWnd(posX, posY, width, height, true);
+		m_pWndViews[i]->moveWnd(posX, posY, width, height, true);
+	}
+
+	++i;
+	posX = 0;
+	posY += height;
+	if (m_pWndViews[i])
+	{
+		m_pWndViews[i]->moveWnd(posX, posY, width, height, true);
+	}
+
+	++i;
+	posX += width;
+	if (m_pWndViews[i])
+	{
+		m_pWndViews[i]->moveWnd(posX, posY, width, height, true);
 	}
 }
 
