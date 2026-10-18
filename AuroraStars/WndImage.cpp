@@ -32,7 +32,6 @@ int CWndImage::onWndRender(CDC* pDC)
 		m_bmpInfo.bmiHeader.biHeight = infoGreyImage.nHeight;
 		m_bmpInfo.bmiHeader.biBitCount = infoGreyImage.nDispBit;
 		m_bmpInfo.bmiHeader.biSizeImage = infoGreyImage.nWidth * infoGreyImage.nHeight * infoGreyImage.nDispBit / 8;
-
 		nRet = ::StretchDIBits(
 			//destination 
 			pDC->m_hDC, m_nViewOrgX, m_nViewOrgY, m_nViewWidth, m_nWiewHeight,
@@ -52,10 +51,8 @@ void CWndImage::onWndSize(UINT nType, int cx, int cy)
 	if (m_pInfoImage)
 	{
 		const INFO_GREY_IMG_& infoGreyImage = m_pInfoImage->getImageInfo();
-		float fRatioImage = static_cast<float>(infoGreyImage.nWidth);
-		float fRatioWnd = static_cast<float>(m_rtClient.Width());
-		fRatioImage = fRatioImage / infoGreyImage.nHeight;
-		fRatioWnd = fRatioWnd / m_rtClient.Height();
+		float fRatioImage = static_cast<float>(infoGreyImage.nWidth) / infoGreyImage.nHeight;
+		float fRatioWnd = static_cast<float>(m_rtClient.Width()) / m_rtClient.Height();
 		if (fRatioImage < fRatioWnd)
 		{
 			m_nViewOrgY = m_rtClient.top;

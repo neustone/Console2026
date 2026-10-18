@@ -276,8 +276,6 @@ void CWndOpengl::onWndSize(UINT nType, int cx, int cy)
 	if (GetSafeHwnd() && cx > 0 && cy > 0)
 	{
 		getClientRect(m_rtViewPort);
-		
 		resetScene();
-		onWndRender(getClientDC());
 	}
 }

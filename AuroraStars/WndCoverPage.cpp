@@ -19,13 +19,12 @@ CWndCoverPage::~CWndCoverPage()
 int CWndCoverPage::onWndRender(CDC* pDC)
 {
 	TRACE(_T("CWndCoverPage::onWndRender\n"));
-	//CPaintDC dc(this); // device context for painting
+	int nRet = -1;
 	if (pDC)
 	{
-		CAuroraDC memDC(pDC, &m_rtClient);
-		memDC.SetBkMode(TRANSPARENT);
-		memDC.SetStretchBltMode(COLORONCOLOR);
-		memDC.FillSolidRect(m_rtClient, m_rgbBkColor);
+		pDC->SetBkMode(TRANSPARENT);
+		pDC->SetStretchBltMode(COLORONCOLOR);
+		pDC->FillSolidRect(m_rtClient, m_rgbBkColor);
 
 		BITMAP bm;
 		if (m_bmpLogo.GetSafeHandle() != NULL && m_bmpLogo.GetObject(sizeof(bm), &bm) > -1)
@@ -33,12 +32,29 @@ int CWndCoverPage::onWndRender(CDC* pDC)
 			CDC dcBmp;
 			dcBmp.CreateCompatibleDC(m_pClientDC);
 			dcBmp.SelectObject(&m_bmpLogo);
-			memDC.StretchBlt(
-				m_rtClient.left, m_rtClient.top,
-				m_rtClient.Width(), m_rtClient.Height(),
+
+			float fRatioImage = static_cast<float>(bm.bmWidth) / bm.bmHeight;
+			float fRatioWnd = static_cast<float>(m_rtClient.Width()) / m_rtClient.Height();
+			int x, y, w, h;
+			if (fRatioImage < fRatioWnd)
+			{
+				y = m_rtClient.top;
+				h = m_rtClient.Height();
+				w = static_cast<int>(m_rtClient.Height() * fRatioImage);
+				x = m_rtClient.Width() / 2 - w / 2;
+			}
+			else
+			{
+				x = m_rtClient.left;
+				w = m_rtClient.Width();
+				h = static_cast<int>(m_rtClient.Width() / fRatioImage);
+				y = m_rtClient.Height() / 2 - h / 2;
+			}
+			pDC->StretchBlt(
+				x, y, w, h,
 				&dcBmp, 0, 0, bm.bmWidth, bm.bmHeight,
-				SRCCOPY
-			);
+				SRCCOPY );
+			nRet = 0;
 		}
 	}
 	return 0;
@@ -47,7 +63,6 @@ int CWndCoverPage::onWndRender(CDC* pDC)
 void CWndCoverPage::onWndSize(UINT nType, int cx, int cy)
 {
 	CWndAurora::onWndSize(nType, cx, cy);
-	onWndRender(getClientDC());
 }
 
 void CWndCoverPage::onLButtonDown(UINT nFlags, int x, int y)
